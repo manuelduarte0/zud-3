@@ -5,126 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZUD-3</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: Arial, sans-serif;
             max-width: 700px;
-            margin: 30px auto;
+            margin: 0 auto;
             padding: 20px;
             background: #1a1a1a;
             color: #fff;
         }
-        h1 {
-            text-align: center;
-            color: #00ff88;
-            font-size: 32px;
+     .header { position: relative; margin-bottom: 10px; }
+        h1 { text-align: center; color: #00ff88; font-size: 32px; }
+     .menu-btn {
+            position: absolute; top: 0; right: 0;
+            background: #333; border: 2px solid #00ff88;
+            color: #00ff88; font-size: 24px; width: 45px; height: 45px;
+            border-radius: 8px; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+        }
+     .menu-btn:hover { background: #00ff88; color: #000; }
+     .sidebar {
+            position: fixed; top: 0; right: -350px; width: 350px; height: 100%;
+            background: #2a2a2a; border-left: 2px solid #00ff88;
+            padding: 20px; transition: right 0.3s ease;
+            z-index: 1000; overflow-y: auto;
+        }
+     .sidebar.aberto { right: 0; }
+     .sidebar h2 { color: #00ff88; margin-bottom: 20px; text-align: center; }
+     .close-btn {
+            position: absolute; top: 15px; right: 15px; background: none;
+            border: none; color: #fff; font-size: 28px; cursor: pointer;
+        }
+     .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: none; z-index: 999;
+        }
+     .overlay.ativo { display: block; }
+     .menu-item {
+            background: #1a1a1a; padding: 15px; margin-bottom: 15px;
+            border-radius: 8px; border: 1px solid #444;
+        }
+     .menu-item h3 { color: #00ff88; font-size: 16px; margin-bottom: 10px; }
+     .menu-item button,.menu-item input,.menu-item textarea {
+            width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px;
+            border: 1px solid #00ff88; background: #333; color: #fff;
+        }
+     .menu-item button { cursor: pointer; }
+     .menu-item button:hover { background: #00ff88; color: #000; }
+     .menu-item textarea { height: 80px; font-size: 13px; }
+     .jogo-salvo {
+            background: #111; padding: 8px; margin: 5px 0;
+            border-radius: 4px; font-size: 12px; border-left: 3px solid #00ff88;
+        }
+     .jogo-salvo button {
+            float: right; padding: 2px 8px; font-size: 11px;
+            background: #ff4444; border: none; margin-top: 0;
         }
         textarea {
-            width: 100%;
-            height: 120px;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #00ff88;
-            border-radius: 8px;
-            box-sizing: border-box;
-            background: #2a2a2a;
-            color: #fff;
+            width: 100%; height: 120px; padding: 10px; font-size: 16px;
+            border: 2px solid #00ff88; border-radius: 8px;
+            background: #2a2a2a; color: #fff; margin-top: 10px;
         }
      .formulas {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 20px 0;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin: 20px 0;
         }
      .formula-btn {
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            background: #333;
-            color: #fff;
-            border: 2px solid #00ff88;
-            border-radius: 8px;
-            cursor: pointer;
+            padding: 15px; font-size: 18px; font-weight: bold;
+            background: #333; color: #fff; border: 2px solid #00ff88;
+            border-radius: 8px; cursor: pointer;
         }
-     .formula-btn:hover {
-            background: #00ff88;
-            color: #000;
-        }
-     .formula-btn.ativo {
-            background: #00ff88;
-            color: #000;
+     .formula-btn:hover,.formula-btn.ativo {
+            background: #00ff88; color: #000;
         }
         #btnGerar {
-            width: 100%;
-            padding: 18px;
-            margin: 10px 0;
-            font-size: 20px;
-            font-weight: bold;
-            background: #00ff88;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            width: 100%; padding: 18px; margin: 10px 0; font-size: 20px;
+            font-weight: bold; background: #00ff88; color: #000;
+            border: none; border-radius: 8px; cursor: pointer;
         }
-        #btnGerar:hover { background: #00cc6a; }
-        #btnGerar:disabled {
-            background: #555;
-            color: #888;
-            cursor: not-allowed;
-        }
+        #btnGerar:disabled { background: #555; color: #888; cursor: not-allowed; }
         #resultado {
-            background: #2a2a2a;
-            padding: 15px;
-            border-radius: 8px;
-            min-height: 150px;
-            font-size: 15px;
-            line-height: 1.8;
+            background: #2a2a2a; padding: 15px; border-radius: 8px;
+            min-height: 150px; font-size: 15px; line-height: 1.8;
             border: 1px solid #00ff88;
         }
      .bloco {
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #1a1a1a;
+            margin-bottom: 15px; padding: 10px; background: #1a1a1a;
             border-left: 4px solid #00ff88;
         }
      .bloco strong { color: #00ff88; }
-     .dica {
-            color: #aaa;
-            font-size: 14px;
-            text-align: center;
-        }
+     .dica { color: #aaa; font-size: 14px; text-align: center; margin-bottom: 10px; }
      .contador {
-            display: flex;
-            justify-content: space-around;
-            margin: 15px 0;
-            padding: 10px;
-            background: #2a2a2a;
-            border-radius: 8px;
+            display: flex; justify-content: space-around; margin: 15px 0;
+            padding: 10px; background: #2a2a2a; border-radius: 8px;
         }
      .cont-item { text-align: center; }
-     .cont-item span {
-            color: #00ff88;
-            font-size: 24px;
-            font-weight: bold;
-        }
+     .cont-item span { color: #00ff88; font-size: 24px; font-weight: bold; }
         #btnCopiar {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            font-size: 16px;
-            background: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            display: none;
+            width: 100%; padding: 12px; margin-top: 10px; font-size: 16px;
+            background: #2196F3; color: white; border: none;
+            border-radius: 8px; cursor: pointer; display: none;
         }
+     .erro { color: #ff4444; }
+     .aviso { color: #ffaa00; font-size: 13px; }
     </style>
 </head>
 <body>
-    <h1>ZUD-3</h1>
-    <p class="dica">Cole 25 números. Z=começa com 0 | U=começa com 1 | D=começa com 2</p>
+    <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
 
-    <textarea id="numeros" placeholder="Cole 25 números: 01, 02, 10, 11, 20..."></textarea>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="fecharMenu()">×</button>
+        <h2>Menu ZUD-3</h2>
+
+        <div class="menu-item">
+            <h3>Jogos Salvos ZUD-5.6.4</h3>
+            <p style="font-size:13px; color:#aaa;">Cadastre até 10 jogos. O gerador vai criar um jogo diferente de todos.</p>
+            <textarea id="novoJogo" placeholder="Cole 15 números: 01,02,03,10,11..."></textarea>
+            <button onclick="adicionarJogo()">Adicionar Jogo</button>
+            <div id="listaJogos" style="margin-top:10px;"></div>
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>ZUD-3</h1>
+        <button class="menu-btn" onclick="abrirMenu()">☰</button>
+    </div>
+
+    <p class="dica">Cole 25 números. Z=começa com 0 | U=começa com 1 | D=começa com 2</p>
+    <textarea id="numeros" placeholder="01, 02, 10, 11, 20..."></textarea>
 
     <div class="contador" id="contador" style="display:none;">
         <div class="cont-item">Z<br><span id="contZ">0</span></div>
@@ -149,8 +157,19 @@
     <script>
         let formulaSelecionada = null;
         let textoResultado = '';
+        let jogosSalvos564 = JSON.parse(localStorage.getItem('zud564_jogos') || '[]');
 
         document.getElementById('numeros').addEventListener('input', contarZUD);
+        atualizarListaJogos();
+
+        function abrirMenu() {
+            document.getElementById('sidebar').classList.add('aberto');
+            document.getElementById('overlay').classList.add('ativo');
+        }
+        function fecharMenu() {
+            document.getElementById('sidebar').classList.remove('aberto');
+            document.getElementById('overlay').classList.remove('ativo');
+        }
 
         function getGrupo(numStr) {
             let str = numStr.toString().padStart(2, '0');
@@ -165,13 +184,11 @@
             let input = document.getElementById('numeros').value;
             let todosNumeros = input.match(/\d+/g) || [];
             let listaUnica = [...new Set(todosNumeros)];
-
             let grupos = { Z: 0, U: 0, D: 0 };
             listaUnica.forEach(num => {
                 let grupo = getGrupo(num);
                 if (grupo) grupos[grupo]++;
             });
-
             document.getElementById('contZ').innerText = grupos.Z;
             document.getElementById('contU').innerText = grupos.U;
             document.getElementById('contD').innerText = grupos.D;
@@ -186,53 +203,114 @@
             document.getElementById('btnGerar').disabled = false;
         }
 
-        function gerar() {
+        function adicionarJogo() {
+            if (jogosSalvos564.length >= 10) {
+                alert('Limite de 10 jogos atingido');
+                return;
+            }
+            let input = document.getElementById('novoJogo').value;
+            let nums = input.match(/\d+/g) || [];
+            let listaUnica = [...new Set(nums)].map(n => parseInt(n)).sort((a,b) => a-b);
+            if (listaUnica.length!== 15) {
+                alert('Precisa ter exatamente 15 números únicos');
+                return;
+            }
+            jogosSalvos564.push(listaUnica);
+            localStorage.setItem('zud564_jogos', JSON.stringify(jogosSalvos564));
+            document.getElementById('novoJogo').value = '';
+            atualizarListaJogos();
+        }
+
+        function removerJogo(index) {
+            jogosSalvos564.splice(index, 1);
+            localStorage.setItem('zud564_jogos', JSON.stringify(jogosSalvos564));
+            atualizarListaJogos();
+        }
+
+        function atualizarListaJogos() {
+            let html = jogosSalvos564.map((jogo, i) =>
+                `<div class="jogo-salvo">
+                    Jogo ${i+1}: ${jogo.join(', ')}
+                    <button onclick="removerJogo(${i})">X</button>
+                </div>`
+            ).join('');
+            document.getElementById('listaJogos').innerHTML = html || '<p style="color:#666; font-size:12px;">Nenhum jogo cadastrado</p>';
+        }
+
+        function validarNumeros() {
             let input = document.getElementById('numeros').value;
             let todosNumeros = input.match(/\d+/g) || [];
             let listaUnica = [...new Set(todosNumeros)];
-
             if (listaUnica.length!== 25) {
-                document.getElementById('resultado').innerHTML = `Precisa ter exatamente 25 números únicos. Você tem ${listaUnica.length}`;
-                return;
+                document.getElementById('resultado').innerHTML = `<span class="erro">Precisa ter exatamente 25 números únicos. Você tem ${listaUnica.length}</span>`;
+                return null;
             }
-
-            if (!formulaSelecionada) {
-                document.getElementById('resultado').innerHTML = "Selecione uma fórmula primeiro";
-                return;
-            }
-
-            // Separa por grupo Z, U, D
             let grupos = { Z: [], U: [], D: [] };
             listaUnica.forEach(numStr => {
                 let grupo = getGrupo(numStr);
                 if (grupo) grupos[grupo].push(numStr);
             });
+            return grupos;
+        }
 
-            let [qtdZ, qtdU, qtdD] = formulaSelecionada;
+        function jogoIgual(jogo1, jogo2) {
+            if (jogo1.length!== jogo2.length) return false;
+            let s1 = [...jogo1].sort((a,b) => a-b);
+            let s2 = [...jogo2].sort((a,b) => a-b);
+            return s1.every((val, i) => val === s2[i]);
+        }
 
-            // Verifica se tem números suficientes
-            if (grupos.Z.length < qtdZ || grupos.U.length < qtdU || grupos.D.length < qtdD) {
-                document.getElementById('resultado').innerHTML =
-                    `Números insuficientes!<br>
-                    Precisa: Z=${qtdZ}, U=${qtdU}, D=${qtdD}<br>
-                    Tem: Z=${grupos.Z.length}, U=${grupos.U.length}, D=${grupos.D.length}`;
-                return;
+        function sortearGrupos(grupos, qtdZ, qtdU, qtdD, tentativas = 0) {
+            if (tentativas > 500) {
+                document.getElementById('resultado').innerHTML = `<span class="erro">Não consegui gerar um jogo diferente dos salvos após 500 tentativas.<br>Adicione mais números na lista ou remova jogos salvos.</span>`;
+                return null;
             }
 
-            // Sorteia cada grupo
+            if (grupos.Z.length < qtdZ || grupos.U.length < qtdU || grupos.D.length < qtdD) {
+                document.getElementById('resultado').innerHTML =
+                    `<span class="erro">Números insuficientes!<br>
+                    Precisa: Z=${qtdZ}, U=${qtdU}, D=${qtdD}<br>
+                    Tem: Z=${grupos.Z.length}, U=${grupos.U.length}, D=${grupos.D.length}</span>`;
+                return null;
+            }
+
             let sorteadosZ = grupos.Z.sort(() => Math.random() - 0.5).slice(0, qtdZ).map(n => parseInt(n));
             let sorteadosU = grupos.U.sort(() => Math.random() - 0.5).slice(0, qtdU).map(n => parseInt(n));
             let sorteadosD = grupos.D.sort(() => Math.random() - 0.5).slice(0, qtdD).map(n => parseInt(n));
+            let jogoGerado = [...sorteadosZ,...sorteadosU,...sorteadosD].sort((a,b) => a-b);
 
+            // Se for ZUD-5.6.4, verifica se é igual a algum salvo
+            if (qtdZ === 5 && qtdU === 6 && qtdD === 4) {
+                for (let jogoSalvo of jogosSalvos564) {
+                    if (jogoIgual(jogoGerado, jogoSalvo)) {
+                        return sortearGrupos(grupos, qtdZ, qtdU, qtdD, tentativas + 1);
+                    }
+                }
+            }
+
+            return {Z: sorteadosZ, U: sorteadosU, D: sorteadosD, completo: jogoGerado};
+        }
+
+        function gerar() {
+            let grupos = validarNumeros();
+            if (!grupos ||!formulaSelecionada) return;
+            let [qtdZ, qtdU, qtdD] = formulaSelecionada;
+            let res = sortearGrupos(grupos, qtdZ, qtdU, qtdD);
+            if (!res) return;
             let nomeFormula = `ZUD-${qtdZ}.${qtdU}.${qtdD}`;
+            if (qtdZ === 5 && qtdU === 6 && qtdD === 4 && jogosSalvos564.length > 0) {
+                nomeFormula += ` - Único`;
+            }
+            exibirResultado(nomeFormula, res);
+        }
 
-            let resultadoHTML = `<div class="bloco"><strong>${nomeFormula}</strong></div>`;
-            resultadoHTML += `<div class="bloco"><strong>Z - ${qtdZ} números:</strong><br>${sorteadosZ.join(', ')}</div>`;
-            resultadoHTML += `<div class="bloco"><strong>U - ${qtdU} números:</strong><br>${sorteadosU.join(', ')}</div>`;
-            resultadoHTML += `<div class="bloco"><strong>D - ${qtdD} números:</strong><br>${sorteadosD.join(', ')}</div>`;
-
-            textoResultado = `${nomeFormula}\nZ: ${sorteadosZ.join(', ')}\nU: ${sorteadosU.join(', ')}\nD: ${sorteadosD.join(', ')}`;
-
+        function exibirResultado(nome, res) {
+            let resultadoHTML = `<div class="bloco"><strong>${nome}</strong></div>`;
+            resultadoHTML += `<div class="bloco"><strong>Z - ${res.Z.length} números:</strong><br>${res.Z.join(', ')}</div>`;
+            resultadoHTML += `<div class="bloco"><strong>U - ${res.U.length} números:</strong><br>${res.U.join(', ')}</div>`;
+            resultadoHTML += `<div class="bloco"><strong>D - ${res.D.length} números:</strong><br>${res.D.join(', ')}</div>`;
+            resultadoHTML += `<div class="bloco"><strong>Completo:</strong><br>${res.completo.join(', ')}</div>`;
+            textoResultado = `${nome}\nZ: ${res.Z.join(', ')}\nU: ${res.U.join(', ')}\nD: ${res.D.join(', ')}\nCompleto: ${res.completo.join(', ')}`;
             document.getElementById('resultado').innerHTML = resultadoHTML;
             document.getElementById('btnCopiar').style.display = 'block';
         }
