@@ -14,68 +14,101 @@
             background: #1a1a1a;
             color: #fff;
         }
-     .header { position: relative; margin-bottom: 10px; }
+   .header { position: relative; margin-bottom: 10px; }
         h1 { text-align: center; color: #00ff88; font-size: 32px; }
-     .menu-btn {
+   .menu-btn {
             position: absolute; top: 0; right: 0;
             background: #333; border: 2px solid #00ff88;
             color: #00ff88; font-size: 24px; width: 45px; height: 45px;
             border-radius: 8px; cursor: pointer; display: flex;
             align-items: center; justify-content: center;
         }
-     .menu-btn:hover { background: #00ff88; color: #000; }
-     .sidebar {
+   .menu-btn:hover { background: #00ff88; color: #000; }
+   .sidebar {
             position: fixed; top: 0; right: -350px; width: 350px; height: 100%;
             background: #2a2a2a; border-left: 2px solid #00ff88;
             padding: 20px; transition: right 0.3s ease;
             z-index: 1000; overflow-y: auto;
         }
-     .sidebar.aberto { right: 0; }
-     .sidebar h2 { color: #00ff88; margin-bottom: 20px; text-align: center; }
-     .close-btn {
+   .sidebar.aberto { right: 0; }
+   .sidebar h2 { color: #00ff88; margin-bottom: 20px; text-align: center; }
+   .close-btn {
             position: absolute; top: 15px; right: 15px; background: none;
             border: none; color: #fff; font-size: 28px; cursor: pointer;
         }
-     .overlay {
+   .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); display: none; z-index: 999;
         }
-     .overlay.ativo { display: block; }
-     .menu-item {
+   .overlay.ativo { display: block; }
+   .menu-item {
             background: #1a1a1a; padding: 15px; margin-bottom: 15px;
             border-radius: 8px; border: 1px solid #444;
         }
-     .menu-item h3 { color: #00ff88; font-size: 16px; margin-bottom: 10px; }
-     .menu-item button,.menu-item input,.menu-item textarea {
+   .menu-item h3 { color: #00ff88; font-size: 16px; margin-bottom: 10px; }
+   .menu-item button,.menu-item input,.menu-item textarea {
             width: 100%; padding: 10px; margin-top: 8px; border-radius: 6px;
             border: 1px solid #00ff88; background: #333; color: #fff;
         }
-     .menu-item button { cursor: pointer; }
-     .menu-item button:hover { background: #00ff88; color: #000; }
-     .menu-item textarea { height: 80px; font-size: 13px; }
-     .jogo-salvo {
+   .menu-item button { cursor: pointer; }
+   .menu-item button:hover { background: #00ff88; color: #000; }
+   .menu-item textarea { height: 80px; font-size: 13px; }
+   .jogo-salvo {
             background: #111; padding: 8px; margin: 5px 0;
             border-radius: 4px; font-size: 12px; border-left: 3px solid #00ff88;
         }
-     .jogo-salvo button {
+   .jogo-salvo button {
             float: right; padding: 2px 8px; font-size: 11px;
             background: #ff4444; border: none; margin-top: 0;
         }
+   .btn-danger { background: #ff4444!important; border-color: #ff4444!important; }
+   .btn-danger:hover { background: #cc0000!important; }
+   .carrossel-container { position: relative; overflow: hidden; }
+   .carrossel-formulas {
+        display: flex;
+        transition: transform 0.3s ease;
+        touch-action: pan-y;
+        cursor: grab;
+    }
+   .carrossel-formulas:active { cursor: grabbing; }
+   .formula-slide {
+        min-width: 100%;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #00ff88;
+        padding: 10px 0;
+        user-select: none;
+    }
+   .carrossel-indicadores {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+   .ponto {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #444;
+        transition: background 0.3s;
+    }
+   .ponto.ativo { background: #00ff88; }
         textarea {
             width: 100%; height: 120px; padding: 10px; font-size: 16px;
             border: 2px solid #00ff88; border-radius: 8px;
             background: #2a2a2a; color: #fff; margin-top: 10px;
         }
-     .formulas {
+   .formulas {
             display: grid; grid-template-columns: 1fr 1fr;
             gap: 10px; margin: 20px 0;
         }
-     .formula-btn {
+   .formula-btn {
             padding: 15px; font-size: 18px; font-weight: bold;
             background: #333; color: #fff; border: 2px solid #00ff88;
             border-radius: 8px; cursor: pointer;
         }
-     .formula-btn:hover,.formula-btn.ativo {
+   .formula-btn:hover,.formula-btn.ativo {
             background: #00ff88; color: #000;
         }
         #btnGerar {
@@ -89,25 +122,26 @@
             min-height: 150px; font-size: 15px; line-height: 1.8;
             border: 1px solid #00ff88;
         }
-     .bloco {
+   .bloco {
             margin-bottom: 15px; padding: 10px; background: #1a1a1a;
             border-left: 4px solid #00ff88;
         }
-     .bloco strong { color: #00ff88; }
-     .dica { color: #aaa; font-size: 14px; text-align: center; margin-bottom: 10px; }
-     .contador {
+   .bloco strong { color: #00ff88; }
+   .dica { color: #aaa; font-size: 14px; text-align: center; margin-bottom: 10px; }
+   .contador {
             display: flex; justify-content: space-around; margin: 15px 0;
             padding: 10px; background: #2a2a2a; border-radius: 8px;
         }
-     .cont-item { text-align: center; }
-     .cont-item span { color: #00ff88; font-size: 24px; font-weight: bold; }
+   .cont-item { text-align: center; }
+   .cont-item span { color: #00ff88; font-size: 24px; font-weight: bold; }
         #btnCopiar {
             width: 100%; padding: 12px; margin-top: 10px; font-size: 16px;
             background: #2196F3; color: white; border: none;
             border-radius: 8px; cursor: pointer; display: none;
         }
-     .erro { color: #ff4444; }
-     .aviso { color: #ffaa00; font-size: 13px; }
+   .erro { color: #ff4444; }
+   .aviso { color: #ffaa00; font-size: 13px; }
+   .info { color: #00ff88; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -118,10 +152,20 @@
         <h2>Menu ZUD-3</h2>
 
         <div class="menu-item">
-            <h3>Jogos Salvos ZUD-5.6.4</h3>
-            <p style="font-size:13px; color:#aaa;">Cadastre até 10 jogos. O gerador vai criar um jogo diferente de todos.</p>
+            <h3>Jogos Salvos</h3>
+            <div class="carrossel-container">
+                <div class="carrossel-indicadores" id="indicadores"></div>
+                <div class="carrossel-formulas" id="carrossel">
+                    <div class="formula-slide" data-formula="4,7,4">ZUD-4.7.4</div>
+                    <div class="formula-slide" data-formula="5,6,4">ZUD-5.6.4</div>
+                    <div class="formula-slide" data-formula="5,7,3">ZUD-5.7.3</div>
+                    <div class="formula-slide" data-formula="6,6,3">ZUD-6.6.3</div>
+                </div>
+            </div>
+            <p style="font-size:13px; color:#aaa; margin-top:10px;">Arrasta pro lado pra trocar. Cadastre até 10 jogos.</p>
             <textarea id="novoJogo" placeholder="Cole 15 números: 01,02,03,10,11..."></textarea>
             <button onclick="adicionarJogo()">Adicionar Jogo</button>
+            <button class="btn-danger" onclick="limparJogos()">Apagar Todos desta Fórmula</button>
             <div id="listaJogos" style="margin-top:10px;"></div>
         </div>
     </div>
@@ -157,10 +201,84 @@
     <script>
         let formulaSelecionada = null;
         let textoResultado = '';
-        let jogosSalvos564 = JSON.parse(localStorage.getItem('zud564_jogos') || '[]');
+        let jogosSalvos = JSON.parse(localStorage.getItem('zud_jogos') || '{}');
+        let formulaAtualIndex = 1;
+        const formulas = ['4,7,4', '5,6,4', '5,7,3', '6,6,3'];
 
         document.getElementById('numeros').addEventListener('input', contarZUD);
+        inicializarCarrossel();
         atualizarListaJogos();
+
+        function inicializarCarrossel() {
+            const carrossel = document.getElementById('carrossel');
+            const indicadores = document.getElementById('indicadores');
+
+            formulas.forEach((_, i) => {
+                let ponto = document.createElement('div');
+                ponto.className = 'ponto' + (i === formulaAtualIndex? ' ativo' : '');
+                indicadores.appendChild(ponto);
+            });
+
+            let startX = 0;
+            let isDragging = false;
+
+            carrossel.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+            carrossel.addEventListener('touchmove', e => {
+                if (!isDragging) return;
+                e.preventDefault();
+            });
+            carrossel.addEventListener('touchend', e => {
+                if (!isDragging) return;
+                let endX = e.changedTouches[0].clientX;
+                if (startX - endX > 50) proximaFormula();
+                if (endX - startX > 50) formulaAnterior();
+                isDragging = false;
+            });
+
+            carrossel.addEventListener('mousedown', e => {
+                startX = e.clientX;
+                isDragging = true;
+            });
+            carrossel.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                e.preventDefault();
+            });
+            carrossel.addEventListener('mouseup', e => {
+                if (!isDragging) return;
+                let endX = e.clientX;
+                if (startX - endX > 50) proximaFormula();
+                if (endX - startX > 50) formulaAnterior();
+                isDragging = false;
+            });
+            carrossel.addEventListener('mouseleave', () => isDragging = false);
+
+            atualizarCarrossel();
+        }
+
+        function proximaFormula() {
+            formulaAtualIndex = (formulaAtualIndex + 1) % formulas.length;
+            atualizarCarrossel();
+        }
+
+        function formulaAnterior() {
+            formulaAtualIndex = (formulaAtualIndex - 1 + formulas.length) % formulas.length;
+            atualizarCarrossel();
+        }
+
+        function atualizarCarrossel() {
+            const carrossel = document.getElementById('carrossel');
+            const pontos = document.querySelectorAll('.ponto');
+            carrossel.style.transform = `translateX(-${formulaAtualIndex * 100}%)`;
+            pontos.forEach((p, i) => p.classList.toggle('ativo', i === formulaAtualIndex));
+            atualizarListaJogos();
+        }
+
+        function getChaveFormula() {
+            return formulas[formulaAtualIndex];
+        }
 
         function abrirMenu() {
             document.getElementById('sidebar').classList.add('aberto');
@@ -204,8 +322,10 @@
         }
 
         function adicionarJogo() {
-            if (jogosSalvos564.length >= 10) {
-                alert('Limite de 10 jogos atingido');
+            let chave = getChaveFormula();
+            if (!jogosSalvos[chave]) jogosSalvos[chave] = [];
+            if (jogosSalvos[chave].length >= 10) {
+                alert('Limite de 10 jogos atingido para esta fórmula');
                 return;
             }
             let input = document.getElementById('novoJogo').value;
@@ -215,20 +335,39 @@
                 alert('Precisa ter exatamente 15 números únicos');
                 return;
             }
-            jogosSalvos564.push(listaUnica);
-            localStorage.setItem('zud564_jogos', JSON.stringify(jogosSalvos564));
+            jogosSalvos[chave].push(listaUnica);
+            localStorage.setItem('zud_jogos', JSON.stringify(jogosSalvos));
             document.getElementById('novoJogo').value = '';
             atualizarListaJogos();
         }
 
         function removerJogo(index) {
-            jogosSalvos564.splice(index, 1);
-            localStorage.setItem('zud564_jogos', JSON.stringify(jogosSalvos564));
+            let chave = getChaveFormula();
+            jogosSalvos[chave].splice(index, 1);
+            localStorage.setItem('zud_jogos', JSON.stringify(jogosSalvos));
             atualizarListaJogos();
         }
 
+        function limparJogos() {
+            let chave = getChaveFormula();
+            if (!jogosSalvos[chave] || jogosSalvos[chave].length === 0) {
+                alert('Não tem jogos salvos nesta fórmula');
+                return;
+            }
+            let nomeFormula = `ZUD-${chave.replace(/,/g,'.')}`;
+            if (confirm(`Apagar todos os ${jogosSalvos[chave].length} jogos da fórmula ${nomeFormula}?`)) {
+                jogosSalvos[chave] = [];
+                localStorage.setItem('zud_jogos', JSON.stringify(jogosSalvos));
+                atualizarListaJogos();
+            }
+        }
+
         function atualizarListaJogos() {
-            let html = jogosSalvos564.map((jogo, i) =>
+            let chave = getChaveFormula();
+            let jogos = jogosSalvos[chave] || [];
+            let nomeFormula = `ZUD-${chave.replace(/,/g,'.')}`;
+            let html = `<p class="info">${nomeFormula} - Jogos: ${jogos.length}/10</p>`;
+            html += jogos.map((jogo, i) =>
                 `<div class="jogo-salvo">
                     Jogo ${i+1}: ${jogo.join(', ')}
                     <button onclick="removerJogo(${i})">X</button>
@@ -279,12 +418,11 @@
             let sorteadosD = grupos.D.sort(() => Math.random() - 0.5).slice(0, qtdD).map(n => parseInt(n));
             let jogoGerado = [...sorteadosZ,...sorteadosU,...sorteadosD].sort((a,b) => a-b);
 
-            // Se for ZUD-5.6.4, verifica se é igual a algum salvo
-            if (qtdZ === 5 && qtdU === 6 && qtdD === 4) {
-                for (let jogoSalvo of jogosSalvos564) {
-                    if (jogoIgual(jogoGerado, jogoSalvo)) {
-                        return sortearGrupos(grupos, qtdZ, qtdU, qtdD, tentativas + 1);
-                    }
+            let chaveFormula = `${qtdZ},${qtdU},${qtdD}`;
+            let jogosDaFormula = jogosSalvos[chaveFormula] || [];
+            for (let jogoSalvo of jogosDaFormula) {
+                if (jogoIgual(jogoGerado, jogoSalvo)) {
+                    return sortearGrupos(grupos, qtdZ, qtdU, qtdD, tentativas + 1);
                 }
             }
 
@@ -298,7 +436,8 @@
             let res = sortearGrupos(grupos, qtdZ, qtdU, qtdD);
             if (!res) return;
             let nomeFormula = `ZUD-${qtdZ}.${qtdU}.${qtdD}`;
-            if (qtdZ === 5 && qtdU === 6 && qtdD === 4 && jogosSalvos564.length > 0) {
+            let chaveFormula = `${qtdZ},${qtdU},${qtdD}`;
+            if (jogosSalvos[chaveFormula] && jogosSalvos[chaveFormula].length > 0) {
                 nomeFormula += ` - Único`;
             }
             exibirResultado(nomeFormula, res);
